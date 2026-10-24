@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.colleclist.app",
+      "sha256_cert_fingerprints": [
+        "73:80:0C:E4:64:1A:2E:62:8C:DE:D5:9D:E5:3D:97:D7:7A:BB:2A:06:59:5A:AF:4D:15:9A:DC:B2:E3:8D:79:48"
+      ]
+    }
+  }
+]

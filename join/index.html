@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>הזמנה לרשימה</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <h1>הזמנה לרשימה ב־CollecList</h1>
+  <p id="lead">כשהאפליקציה מותקנת, הקישור הזה פותח אותה ישר בהצטרפות.</p>
+
+  <div class="card">
+    <a class="button" id="open" href="/">פתיחה באפליקציה</a>
+    <a class="button secondary" href="https://github.com/roie1422/roie1422.github.io/releases/latest/download/CollecList.apk">עדיין אין לי את האפליקציה — הורדה</a>
+    <p>אחרי ההתקנה והכניסה עם Google — חוזרים להודעה ולוחצים שוב על הקישור.</p>
+  </div>
+
+  <div class="card" id="code-card" hidden>
+    <h2 style="margin-top:0">או עם הקוד</h2>
+    <p>באפליקציה: ״הרשימות שלי״ ← ״הצטרפות לרשימה״, ומדביקים את הקוד:</p>
+    <p><code id="code"></code></p>
+  </div>
+
+  <p><small>ההצטרפות לא דורשת אישור נוסף מהמנהל. קישור שבוטל מציג באפליקציה הודעה ואפשרות לבקש קישור חדש.</small></p>
+</main>
+<script>
+  // The token is only passed on to the app; this page stores and sends nothing.
+  var params = new URLSearchParams(location.search);
+  var token = (params.get('t') || '').toLowerCase();
+  if (!/^[0-9a-f]{36}$/.test(token)) {
+    document.getElementById('lead').textContent = 'הקישור חסר או שגוי. בקשו מהמזמין קישור חדש.';
+    document.getElementById('open').hidden = true;
+  } else {
+    document.getElementById('code').textContent = token;
+    document.getElementById('code-card').hidden = false;
+    var app = 'com.colleclist.app://join/' + token;
+    // Android browsers open apps through an intent link; elsewhere the app's own link.
+    document.getElementById('open').href = /android/i.test(navigator.userAgent)
+      ? 'intent://join/' + token + '#Intent;scheme=com.colleclist.app;package=com.colleclist.app;end'
+      : app;
+  }
+</script>
+</body>
+</html>
